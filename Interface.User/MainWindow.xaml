@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keesh.Interface.User"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Keesh" Style="{StaticResource DefaultWindowStyle}">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="OpenCommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,14 +17,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="_View">
-                <MenuItem Header="_CPI"/>
-                <MenuItem Header="_GDP"/>
+            <MenuItem Header="_Options">
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
         </Menu>
-        <TextBlock TextAlignment="Center" Grid.Row="2">
-            Data provided by 
-            <Hyperlink NavigateUri="https://www.alphavantage.co/" Click="DataProviderLink_Click">https://www.alphavantage.co/</Hyperlink>
-        </TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center">Data provided by <Hyperlink NavigateUri="https://www.alphavantage.co/" Click="DataProviderHyperlink_Click">https://www.alphavantage.co/</Hyperlink></TextBlock>
     </Grid>
 </Window>

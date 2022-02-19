@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +26,20 @@ namespace Keesh.Interface.User
             InitializeComponent();
         }
 
-        private void DataProviderLink_Click(object sender, RoutedEventArgs e)
+        private void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            string url = ((Hyperlink)sender).NavigateUri.ToString();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(url)
+            this.Close();
+        }
+
+        private void DataProviderHyperlink_Click(object sender, RoutedEventArgs e)
+        {            
+            ProcessStartInfo startInfo = new ProcessStartInfo()
             {
+                UseShellExecute = true,
                 Verb = "Open",
-                UseShellExecute = true
+                FileName = ((Hyperlink)sender).NavigateUri.ToString()
             };
-            System.Diagnostics.Process.Start(startInfo);
+            Process.Start(startInfo);
         }
     }
 }
