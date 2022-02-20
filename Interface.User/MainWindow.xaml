@@ -9,19 +9,19 @@
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
                         Executed="OpenCommandBinding_Executed"/>
+        <CommandBinding Command="NavigationCommands.GoToPage"
+                        Executed="GoToPageCommandBinding_Executed" />
     </Window.CommandBindings>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Options">
+                <MenuItem Header="_Home" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/Home.xaml"/>
+                <MenuItem Header="_Prototype" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/ProtoType.xaml"/>
                 <Separator/>
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
         </Menu>
-        <TextBlock Grid.Row="2" HorizontalAlignment="Center">Data provided by <Hyperlink NavigateUri="https://www.alphavantage.co/" Click="DataProviderHyperlink_Click">https://www.alphavantage.co/</Hyperlink></TextBlock>
-    </Grid>
+        <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center">Data provided by <Hyperlink NavigateUri="https://www.alphavantage.co/" Click="DataProviderHyperlink_Click">https://www.alphavantage.co/</Hyperlink></TextBlock>
+        <Frame x:Name="navigationFrame" Source="NavigationPage/Home.xaml" Margin="0,0,0,15" NavigationUIVisibility="Hidden" />
+    </DockPanel>
 </Window>

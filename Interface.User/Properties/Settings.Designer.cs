@@ -22,5 +22,14 @@ namespace Keesh.Interface.User.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Keesh.ApiKey")]
+        public string ApiKeyVariable {
+            get {
+                return ((string)(this["ApiKeyVariable"]));
+            }
+        }
     }
 }

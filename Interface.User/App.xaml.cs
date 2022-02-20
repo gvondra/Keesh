@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Interface.User
+namespace Keesh.Interface.User
 {
     /// <summary>
     /// Interaction logic for App.xaml

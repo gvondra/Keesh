@@ -41,5 +41,12 @@ namespace Keesh.Interface.User
             };
             Process.Start(startInfo);
         }
+
+        private void GoToPageCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NavigationService navigationService = navigationFrame.NavigationService;
+            //NavigationService navigationService = NavigationService.GetNavigationService(navigationFrame);
+            navigationService.Navigate(new Uri((string)e.Parameter, UriKind.Relative));
+        }
     }
 }
