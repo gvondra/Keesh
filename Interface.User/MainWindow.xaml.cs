@@ -32,7 +32,7 @@ namespace Keesh.Interface.User
         }
 
         private void DataProviderHyperlink_Click(object sender, RoutedEventArgs e)
-        {            
+        {   
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 UseShellExecute = true,

@@ -5,7 +5,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <sys:Double x:Key="DefaultFontSize">11</sys:Double>
+        <sys:Double x:Key="DefaultFontSize">12</sys:Double>
         <FontFamily x:Key="DefaultFont">Verdana</FontFamily>
         <Style x:Key="DefaultWindowStyle" TargetType="Window">
             <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}"/>
@@ -13,6 +13,10 @@
             <Setter Property="Width" Value="800"/>
             <Setter Property="Height" Value="600"/>
             <Setter Property="WindowState" Value="Maximized" />
+        </Style>
+        <Style x:Key="ErrorWindowStyle" TargetType="Window" BasedOn="{StaticResource DefaultWindowStyle}">
+            <Setter Property="Background" Value="Pink"/>
+            <Setter Property="WindowState" Value="Normal"/>
         </Style>
     </Application.Resources>
 </Application>
