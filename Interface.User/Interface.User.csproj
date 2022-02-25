@@ -107,6 +107,7 @@
     <Compile Include="Core\ApiKeyProcessor.cs" />
     <Compile Include="Core\CompanyOverviewFactory.cs" />
     <Compile Include="Data\ApiKeyDataProcessor.cs" />
+    <Compile Include="Data\CacheDirectory.cs" />
     <Compile Include="Data\CompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\DataModule.cs" />
     <Compile Include="Data\DataSerializer.cs" />
@@ -115,7 +116,6 @@
     <Compile Include="Data\ICompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\IDataSerializer.cs" />
     <Compile Include="Data\IFilePurger.cs" />
-    <Compile Include="Data\ISettings.cs" />
     <Compile Include="DependencyInjection\ContainerFactory.cs" />
     <Compile Include="DependencyInjection\InterfaceUserModule.cs" />
     <Compile Include="Framework\IApiKeyProcessor.cs" />
@@ -129,7 +129,6 @@
       <DependentUpon>CompanyOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\AlphaVantageSettings.cs" />
-    <Compile Include="Settings\DataSettings.cs" />
     <Compile Include="Settings\ISettingsFactory.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsFactory.cs" />

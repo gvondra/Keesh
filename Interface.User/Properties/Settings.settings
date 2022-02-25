@@ -2,14 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Keesh.Interface.User.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApiKeyVariable" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Keesh.ApiKey</Value>
-    </Setting>
     <Setting Name="AlphaVantageBaseAddress" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://www.alphavantage.co</Value>
-    </Setting>
-    <Setting Name="DataCacheFolderName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">cache</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -11,10 +11,10 @@ namespace Keesh.Interface.User.Data
     {
         private const string FILE_NAME = "api-key.dat";
 
-        public string GetKey(ISettings settings)
+        public string GetKey()
         {
             string key = null;
-            string fileName = GetFileName(settings);
+            string fileName = CacheDirectory.GetFileName(FILE_NAME);
             if (File.Exists(fileName))
             {
                 using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -28,11 +28,12 @@ namespace Keesh.Interface.User.Data
             return key;
         }
 
-        public void SetKey(ISettings settings, string key)
+        public void SetKey(string key)
         {
             if (!string.IsNullOrEmpty(key))
             {
-                using (FileStream stream = new FileStream(GetFileName(settings), FileMode.Create, FileAccess.Write, FileShare.None))
+                CacheDirectory.CreateCacheDirectory();
+                using (FileStream stream = new FileStream(CacheDirectory.GetFileName(FILE_NAME), FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode))
                     {
@@ -40,11 +41,8 @@ namespace Keesh.Interface.User.Data
                     }
                 }
             }
-            else if (File.Exists(GetFileName(settings)))
-                File.Delete(GetFileName(settings));
+            else if (File.Exists(CacheDirectory.GetFileName(FILE_NAME)))
+                File.Delete(CacheDirectory.GetFileName(FILE_NAME));
         }
-
-        private string GetFileName(ISettings settings)
-            => Path.Combine(settings.CacheFolderName, FILE_NAME);
     }
 }

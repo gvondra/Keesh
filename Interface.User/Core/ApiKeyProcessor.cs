@@ -14,19 +14,16 @@ namespace Keesh.Interface.User.Core
     {
         private static string _keyValue; // caching the key value here. when the key value changes, then drop this cache.
         private readonly IApiKeyDataProcessor _dataProcessor;
-        private readonly ISettingsFactory _settingFactory;
 
-        public ApiKeyProcessor(IApiKeyDataProcessor apiKeyDataProcessor,
-            ISettingsFactory settingsFactory)
+        public ApiKeyProcessor(IApiKeyDataProcessor apiKeyDataProcessor)
         {
             _dataProcessor = apiKeyDataProcessor;
-            _settingFactory = settingsFactory;
         }
 
         public ApiKey GetApiKey(Framework.ISettings settings)
         {
             if (_keyValue == null)
-                _keyValue = _dataProcessor.GetKey(_settingFactory.CreateData()) ?? string.Empty;
+                _keyValue = _dataProcessor.GetKey() ?? string.Empty;
             return new ApiKey
             {
                 Key = _keyValue
@@ -39,7 +36,7 @@ namespace Keesh.Interface.User.Core
             string value = (apiKey.Key ?? string.Empty).Trim();
             if (value == string.Empty)
                 value = null;
-            _dataProcessor.SetKey(_settingFactory.CreateData(), value);
+            _dataProcessor.SetKey(value);
         }
     }
 }

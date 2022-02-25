@@ -31,7 +31,7 @@ namespace Keesh.Interface.User.Core
 
         public async Task<CompanyOverview> Get(Framework.ISettings settings, string symbol, string apiKey)
         {
-            CompanyOverview companyOverview = await _dataProcessor.Get(_settingsFactory.CreateData(), symbol);
+            CompanyOverview companyOverview = await _dataProcessor.Get(symbol);
             if (companyOverview == null)
             {
                 AlphaVantageModels.CompanyOverview companyOverviewAlphaVantage = await _fundamentalDataService.GetCompanyOverview(_settingsFactory.CreateAlphaVantage(), symbol, apiKey);
@@ -39,7 +39,7 @@ namespace Keesh.Interface.User.Core
                 {
                     IMapper mapper = new Mapper(Configuration.MapperConfigurationAlphaVantage);
                     companyOverview = mapper.Map<CompanyOverview>(companyOverviewAlphaVantage);
-                    await _dataProcessor.Save(_settingsFactory.CreateData(), symbol, companyOverview);
+                    await _dataProcessor.Save(symbol, companyOverview);
                 }
             }
             return companyOverview;

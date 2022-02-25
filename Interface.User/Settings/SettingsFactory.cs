@@ -11,10 +11,7 @@ namespace Keesh.Interface.User.Settings
     {
         public Keesh.Interface.User.Framework.ISettings Create()
         {
-            return new Settings()
-            { 
-                ApiKeyVariableName = Properties.Settings.Default.ApiKeyVariable
-            };
+            return new Settings();
         }
 
         public ISettings CreateAlphaVantage()
@@ -22,14 +19,6 @@ namespace Keesh.Interface.User.Settings
             return new AlphaVantageSettings()
             {
                 BaseAddress = Properties.Settings.Default.AlphaVantageBaseAddress
-            };
-        }
-
-        public Data.ISettings CreateData()
-        {
-            return new DataSettings()
-            {
-                CacheFolderName = Properties.Settings.Default.DataCacheFolderName
             };
         }
     }

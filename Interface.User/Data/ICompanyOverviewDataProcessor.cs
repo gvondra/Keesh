@@ -9,7 +9,7 @@ namespace Keesh.Interface.User.Data
 {
     public interface ICompanyOverviewDataProcessor
     {
-        Task<CompanyOverview> Get(ISettings settings, string symbol);
-        Task Save(ISettings settings, string symbol, CompanyOverview data);
+        Task<CompanyOverview> Get(string symbol);
+        Task Save(string symbol, CompanyOverview data);
     }
 }

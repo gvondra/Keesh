@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 namespace Keesh.Interface.User.Settings
 {
     public class Settings : Keesh.Interface.User.Framework.ISettings
-    {
-        public string ApiKeyVariableName { get; set; }
-    }
+    {}
 }

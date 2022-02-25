@@ -22,24 +22,23 @@ namespace Keesh.Interface.User.Data
             _filePurger = filePurger;
         }
 
-        public async Task<CompanyOverview> Get(ISettings settings, string symbol)
+        public async Task<CompanyOverview> Get(string symbol)
         {
             CompanyOverview result = null;
-            string indexFileName = GetIndexFileName(settings);
+            string indexFileName = GetIndexFileName();
             Dictionary<string, string> index = await _dataSerializer.LoadData<Dictionary<string, string>>(indexFileName);
-            await PurgeFiles(settings, index);
+            await PurgeFiles(index);
             if (index != null && index.ContainsKey(symbol))
             {
-                result = await _dataSerializer.LoadData<CompanyOverview>(GetDataFileName(settings, index[symbol]));
+                result = await _dataSerializer.LoadData<CompanyOverview>(GetDataFileName(index[symbol]));
             }
             return result;
         }
 
-        public async Task Save(ISettings settings, string symbol, CompanyOverview data)
+        public async Task Save(string symbol, CompanyOverview data)
         {
-            if (!Directory.Exists(settings.CacheFolderName))
-                Directory.CreateDirectory(settings.CacheFolderName);
-            string indexFileName = GetIndexFileName(settings);
+            CacheDirectory.CreateCacheDirectory();
+            string indexFileName = GetIndexFileName();
             Dictionary<string, string> index = await _dataSerializer.LoadData<Dictionary<string, string>>(indexFileName);
             if (index == null)
                 index = new Dictionary<string, string>();
@@ -48,23 +47,23 @@ namespace Keesh.Interface.User.Data
                 index[symbol] = Guid.NewGuid().ToString("N");
                 await _dataSerializer.SaveData(indexFileName, index);
             }
-            await _dataSerializer.SaveData(GetDataFileName(settings, index[symbol]), data);
-            await PurgeFiles(settings, index);
+            await _dataSerializer.SaveData(GetDataFileName(index[symbol]), data);
+            await PurgeFiles(index);
         }
 
-        private async Task PurgeFiles(ISettings settings, Dictionary<string, string> index)
+        private async Task PurgeFiles(Dictionary<string, string> index)
         {
             if (index != null)
             {
                 DateTime expiration = DateTime.UtcNow.AddHours(-1 * EXPIRATION_HOURS);
-                await _filePurger.Purge(expiration, index.Select(kv => GetDataFileName(settings, kv.Value)));
+                await _filePurger.Purge(expiration, index.Select(kv => GetDataFileName(kv.Value)));
             }
         }
 
-        private string GetDataFileName(ISettings settings, string guid)
-            => Path.Combine(settings.CacheFolderName, $"{guid}.json");
+        private string GetDataFileName(string guid)
+            => CacheDirectory.GetFileName($"{guid}.json");
 
-        private string GetIndexFileName(ISettings settings)
-            => Path.Combine(settings.CacheFolderName, INDEX_FILE_NAME);
+        private string GetIndexFileName()
+            => CacheDirectory.GetFileName(INDEX_FILE_NAME);
     }
 }

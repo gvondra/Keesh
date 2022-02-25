@@ -8,7 +8,7 @@ namespace Keesh.Interface.User.Data
 {
     public interface IApiKeyDataProcessor
     {
-        string GetKey(ISettings settings);
-        void SetKey(ISettings settings, string key);
+        string GetKey();
+        void SetKey(string key);
     }
 }

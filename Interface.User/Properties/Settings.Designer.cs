@@ -25,28 +25,10 @@ namespace Keesh.Interface.User.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Keesh.ApiKey")]
-        public string ApiKeyVariable {
-            get {
-                return ((string)(this["ApiKeyVariable"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://www.alphavantage.co")]
         public string AlphaVantageBaseAddress {
             get {
                 return ((string)(this["AlphaVantageBaseAddress"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cache")]
-        public string DataCacheFolderName {
-            get {
-                return ((string)(this["DataCacheFolderName"]));
             }
         }
     }
