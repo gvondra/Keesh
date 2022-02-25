@@ -1,0 +1,501 @@
+﻿<Page x:Class="Keesh.Interface.User.NavigationPage.CompanyOverview"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Keesh.Interface.User.NavigationPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Keesh: Company Overview">
+    <Page.Resources>
+        <Style x:Key="FlowDocumentStyle" TargetType="FlowDocument">
+            <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+            <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}"/>
+        </Style>
+        <Style TargetType="TableCell">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>            
+        </Style>        
+    </Page.Resources>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">API Key:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=ApiKey.Key, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0">Ticker Symbol:</TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=TickerSymbol, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" MinWidth="50" Click="LoadButton_Click">_Load</Button>
+        </Grid>    
+        <FlowDocumentScrollViewer>
+            <FlowDocument Style="{StaticResource FlowDocumentStyle}">
+                <Table CellSpacing="0">
+                    <Table.Columns>
+                        <TableColumn Width="300"/>
+                        <TableColumn/>
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>AssetType</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=AssetType}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Name</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Description</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>CIK</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=CIK}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Exchange</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Exchange}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Currency</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Currency}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Country</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Country}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Sector</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Sector}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Industry</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Industry}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Address</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Address}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>FiscalYearEnd</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=FiscalYearEnd}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>LatestQuarter</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=LatestQuarter}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MarketCapitalization</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=MarketCapitalization}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>EBITDA</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=EBITDA}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>PERatio</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=PERatio}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>PEGRatio</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=PEGRatio}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>BookValue</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=BookValue}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>DividendPerShare</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=DividendPerShare}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>DividendYield</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=DividendYield}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>EPS</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=EPS}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>RevenuePerShareTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=RevenuePerShareTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>ProfitMargin</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=ProfitMargin}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>OperatingMarginTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=OperatingMarginTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>ReturnOnAssetsTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=ReturnOnAssetsTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>ReturnOnEquityTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=ReturnOnEquityTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>RevenueTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=RevenueTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>GrossProfitTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=GrossProfitTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>DilutedEPSTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=DilutedEPSTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>QuarterlyEarningsGrowthYOY</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=QuarterlyEarningsGrowthYOY}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>QuarterlyRevenueGrowthYOY</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=QuarterlyRevenueGrowthYOY}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>AnalystTargetPrice</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=AnalystTargetPrice}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>TrailingPE</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=TrailingPE}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>ForwardPE</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=ForwardPE}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>PriceToSalesRatioTTM</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=PriceToSalesRatioTTM}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>PriceToBookRatio</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=PriceToBookRatio}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>EVToRevenue</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=EVToRevenue}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>EVToEBITDA</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=EVToEBITDA}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Beta</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Beta}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>High52Week</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=High52Week}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Low52Week</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=Low52Week}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MovingAverage50Day</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=MovingAverage50Day}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MovingAverage200Day</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=MovingAverage200Day}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>SharesOutstanding</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=SharesOutstanding}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>DividendDate</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=DividendDate}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>ExDividendDate</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <TextBlock Text="{Binding Path=ExDividendDate}"/>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </DockPanel>
+</Page>

@@ -59,6 +59,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -77,8 +80,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,17 +102,36 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ApiKeyProcessor.cs" />
+    <Compile Include="Core\CompanyOverviewFactory.cs" />
     <Compile Include="Core\EnvironmentVariableProcessor.cs" />
+    <Compile Include="Data\CompanyOverviewDataProcessor.cs" />
+    <Compile Include="Data\DataModule.cs" />
+    <Compile Include="Data\DataSerializer.cs" />
+    <Compile Include="Data\FilePurger.cs" />
+    <Compile Include="Data\ICompanyOverviewDataProcessor.cs" />
+    <Compile Include="Data\IDataSerializer.cs" />
+    <Compile Include="Data\IFilePurger.cs" />
+    <Compile Include="Data\ISettings.cs" />
     <Compile Include="DependencyInjection\ContainerFactory.cs" />
     <Compile Include="DependencyInjection\InterfaceUserModule.cs" />
     <Compile Include="Framework\IApiKeyProcessor.cs" />
+    <Compile Include="Framework\ICompanyOverviewFactory.cs" />
     <Compile Include="Framework\IEnvironmentVariableProcessor.cs" />
     <Compile Include="Framework\ISettings.cs" />
+    <Compile Include="InputValidator\ApiKeyValidator.cs" />
+    <Compile Include="InputValidator\CompanyOverviewValidator.cs" />
     <Compile Include="Mapping\Configuration.cs" />
+    <Compile Include="Model\CompanyOverview.cs" />
+    <Compile Include="NavigationPage\CompanyOverview.xaml.cs">
+      <DependentUpon>CompanyOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AlphaVantageSettings.cs" />
+    <Compile Include="Settings\DataSettings.cs" />
     <Compile Include="Settings\ISettingsFactory.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsFactory.cs" />
     <Compile Include="ViewModel\ApiKeyVM.cs" />
+    <Compile Include="ViewModel\CompanyOverviewVM.cs" />
     <Page Include="Control\ExceptionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +158,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NavigationPage\CompanyOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NavigationPage\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,5 +218,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Interface.AlphaVantage\Interface.AlphaVantage.csproj">
+      <Project>{e82905f3-439f-421b-ab78-d4956e65f945}</Project>
+      <Name>Interface.AlphaVantage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

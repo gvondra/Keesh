@@ -9,5 +9,7 @@ namespace Keesh.Interface.User.Settings
     public interface ISettingsFactory
     {
         Keesh.Interface.User.Framework.ISettings Create();
+        Keesh.Interface.AlphaVantage.ISettings CreateAlphaVantage();
+        Keesh.Interface.User.Data.ISettings CreateData();
     }
 }

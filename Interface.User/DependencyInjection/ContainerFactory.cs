@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Keesh.Interface.AlphaVantage;
+
 namespace Keesh.Interface.User.DependencyInjection
 {
     public class ContainerFactory
@@ -9,6 +11,8 @@ namespace Keesh.Interface.User.DependencyInjection
         {
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new InterfaceUserModule());
+            builder.RegisterModule(new Data.DataModule());
+            builder.RegisterModule(new InterfaceAlphaVantageModule());
             _container = builder.Build();
         }
 
