@@ -11,6 +11,7 @@ namespace Keesh.Interface.User.DependencyInjection
             base.Load(builder);
             builder.RegisterType<SettingsFactory>().As<ISettingsFactory>();
             builder.RegisterType<ApiKeyProcessor>().As<IApiKeyProcessor>();
+            builder.RegisterType<CalendarFactory>().As<ICalendarFactory>();
             builder.RegisterType<CompanyOverviewFactory>().As<ICompanyOverviewFactory>();
         }
     }

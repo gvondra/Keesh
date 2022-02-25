@@ -22,5 +22,10 @@ namespace Keesh.Interface.User.Data
                 }
             });
         }
+
+        public Task Purge(DateTime expirationTimestamp, params string[] fileNames)
+        {
+            return Purge(expirationTimestamp, (IEnumerable<string>)fileNames);
+        }
     }
 }

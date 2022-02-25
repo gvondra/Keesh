@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Keesh.Interface.User.NavigationPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Keesh: Company Overview">
+      Title="Keesh: Company Overview" Style="{StaticResource DefaultPageStyle}">
     <Page.Resources>
         <Style x:Key="FlowDocumentStyle" TargetType="FlowDocument">
             <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>

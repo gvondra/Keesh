@@ -29,7 +29,7 @@ namespace Keesh.Interface.User.Core
             _dataProcessor = companyOverviewDataProcessor;
         }
 
-        public async Task<CompanyOverview> Get(Framework.ISettings settings, string symbol, string apiKey)
+        public async Task<CompanyOverview> Get(string symbol, string apiKey)
         {
             CompanyOverview companyOverview = await _dataProcessor.Get(symbol);
             if (companyOverview == null)

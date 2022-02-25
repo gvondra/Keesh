@@ -17,17 +17,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Keesh.Interface.User.NavigationPage
 {
     /// <summary>
-    /// Interaction logic for CompanyOverview.xaml
+    /// Interaction logic for Calendar.xaml
     /// </summary>
-    public partial class CompanyOverview : Page
+    public partial class Calendar : Page
     {
         private readonly IContainer _container;
 
-        public CompanyOverview()
+        public Calendar()
         {
             _container = DependencyInjection.ContainerFactory.Container;
             NavigationCommands.BrowseBack.InputGestures.Clear();
@@ -35,7 +36,7 @@ namespace Keesh.Interface.User.NavigationPage
             InitializeComponent();
         }
 
-        public CompanyOverviewVM CompanyOverviewVM { get; set; }
+        public CalendarVM CalendarVM { get; set; }
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -44,7 +45,7 @@ namespace Keesh.Interface.User.NavigationPage
             {
                 InitializeData(scope);
             }
-            DataContext = CompanyOverviewVM;
+            DataContext = CalendarVM;
         }
 
         private void InitializeData(ILifetimeScope scope)
@@ -53,7 +54,7 @@ namespace Keesh.Interface.User.NavigationPage
             IApiKeyProcessor apiKeyProcessor = scope.Resolve<IApiKeyProcessor>();
             IMapper mapper = new Mapper(Mapping.Configuration.MapperConfiguration);
             Model.ApiKey apiKey = apiKeyProcessor.GetApiKey(settingsFactory.Create());
-            CompanyOverviewVM = new CompanyOverviewVM()
+            CalendarVM = new CalendarVM()
             {
                 ApiKey = mapper.Map<ApiKeyVM>(apiKey)
             };
@@ -63,11 +64,11 @@ namespace Keesh.Interface.User.NavigationPage
         {
             try
             {
-                if (!string.IsNullOrEmpty(CompanyOverviewVM.ApiKey?.Key) && !string.IsNullOrEmpty(CompanyOverviewVM.TickerSymbol))
+                if (!string.IsNullOrEmpty(CalendarVM.ApiKey?.Key))
                 {
-                    Task.Run<Model.CompanyOverview>(() => GetCompanyOverview(CompanyOverviewVM.ApiKey.Key, CompanyOverviewVM.TickerSymbol))
-                        .ContinueWith(GetCompanyOverviewCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
-                    Task.Run(() => SaveApiKey(CompanyOverviewVM.ApiKey));
+                    Task.Run(() => GetEarningsCalendar(CalendarVM.ApiKey.Key))
+                        .ContinueWith(GetEarningsCalendarCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
+                    Task.Run(() => SaveApiKey(CalendarVM.ApiKey));
                 }
             }
             catch (Exception ex)
@@ -87,13 +88,16 @@ namespace Keesh.Interface.User.NavigationPage
             }
         }
 
-        private async Task GetCompanyOverviewCallback(Task<Model.CompanyOverview> task, object state)
+        private async Task GetEarningsCalendarCallback(Task<List<Model.EarningsCalendarItem>> task, object state)
         {
             try
-            {
-                Model.CompanyOverview data = await task;
-                IMapper mapper = new Mapper(Mapping.Configuration.MapperConfiguration);
-                mapper.Map<Model.CompanyOverview, CompanyOverviewVM>(data, this.CompanyOverviewVM);
+            {                
+                CalendarVM.EarningsCalendarItems.Clear();
+                using(DispatcherProcessingDisabled dpd = Dispatcher.DisableProcessing())
+                foreach (Model.EarningsCalendarItem item in await task)
+                {
+                    CalendarVM.EarningsCalendarItems.Add(item);
+                }
             }
             catch (Exception ex)
             {
@@ -101,16 +105,14 @@ namespace Keesh.Interface.User.NavigationPage
             }
         }
 
-        private async Task<Model.CompanyOverview> GetCompanyOverview(string key, string symbol)
+        private async Task<List<Model.EarningsCalendarItem>> GetEarningsCalendar(string key)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
-            if (string.IsNullOrEmpty(symbol))
-                throw new ArgumentNullException(nameof(symbol));
             using (ILifetimeScope scope = _container.BeginLifetimeScope())
             {
-                ICompanyOverviewFactory companyOverviewFactory = scope.Resolve<ICompanyOverviewFactory>();
-                return await companyOverviewFactory.Get(symbol, key);
+                ICalendarFactory calendarFactory = scope.Resolve<ICalendarFactory>();
+                return (await calendarFactory.GetEarnings(key)).ToList();
             }
         }
     }

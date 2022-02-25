@@ -8,6 +8,7 @@ namespace Keesh.Interface.User.Data
 {
     public interface IFilePurger
     {
+        Task Purge(DateTime expirationTimestamp, params string[] fileNames);
         Task Purge(DateTime expirationTimestamp, IEnumerable<string> fileNames);
     }
 }

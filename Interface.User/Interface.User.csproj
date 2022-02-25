@@ -59,8 +59,14 @@
     <Reference Include="BrassLoon.RestClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BrassLoon.RestClient.1.0.0\lib\netstandard2.0\BrassLoon.RestClient.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper, Version=27.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.27.2.1\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.0.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -105,26 +111,34 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ApiKeyProcessor.cs" />
+    <Compile Include="Core\CalendarFactory.cs" />
     <Compile Include="Core\CompanyOverviewFactory.cs" />
     <Compile Include="Data\ApiKeyDataProcessor.cs" />
     <Compile Include="Data\CacheDirectory.cs" />
+    <Compile Include="Data\CalendarDataProcessor.cs" />
     <Compile Include="Data\CompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\DataModule.cs" />
     <Compile Include="Data\DataSerializer.cs" />
     <Compile Include="Data\FilePurger.cs" />
     <Compile Include="Data\IApiKeyDataProcessor.cs" />
+    <Compile Include="Data\ICalendarDataProcessor.cs" />
     <Compile Include="Data\ICompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\IDataSerializer.cs" />
     <Compile Include="Data\IFilePurger.cs" />
     <Compile Include="DependencyInjection\ContainerFactory.cs" />
     <Compile Include="DependencyInjection\InterfaceUserModule.cs" />
     <Compile Include="Framework\IApiKeyProcessor.cs" />
+    <Compile Include="Framework\ICalendarFactory.cs" />
     <Compile Include="Framework\ICompanyOverviewFactory.cs" />
     <Compile Include="Framework\ISettings.cs" />
     <Compile Include="InputValidator\ApiKeyValidator.cs" />
     <Compile Include="InputValidator\CompanyOverviewValidator.cs" />
     <Compile Include="Mapping\Configuration.cs" />
+    <Compile Include="Model\EarningsCalendarItem.cs" />
     <Compile Include="Model\CompanyOverview.cs" />
+    <Compile Include="NavigationPage\Calendar.xaml.cs">
+      <DependentUpon>Calendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationPage\CompanyOverview.xaml.cs">
       <DependentUpon>CompanyOverview.xaml</DependentUpon>
     </Compile>
@@ -133,6 +147,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsFactory.cs" />
     <Compile Include="ViewModel\ApiKeyVM.cs" />
+    <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\CompanyOverviewVM.cs" />
     <Page Include="Control\ExceptionItem.xaml">
       <SubType>Designer</SubType>
@@ -160,6 +175,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NavigationPage\Calendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NavigationPage\CompanyOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Keesh.Interface.User.Framework
 {
-    public interface ICompanyOverviewFactory
+    public interface ICalendarFactory
     {
-        Task<CompanyOverview> Get(string symbol, string apiKey);
+        Task<IEnumerable<EarningsCalendarItem>> GetEarnings(string apiKey);
     }
 }

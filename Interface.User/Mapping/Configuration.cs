@@ -25,7 +25,7 @@ namespace Keesh.Interface.User.Mapping
             _mapperConfigurationAlphaVantage = new MapperConfiguration(configExp =>
             {
                 configExp.CreateMap<AlphaVantageModels.CompanyOverview, Model.CompanyOverview>();
-                configExp.CreateMap<Model.CompanyOverview, AlphaVantageModels.CompanyOverview>();
+                configExp.CreateMap<AlphaVantageModels.EarningsCalendarItem, Model.EarningsCalendarItem>();
             });
         }
 
