@@ -6,6 +6,7 @@ namespace Keesh.Interface.User.Data
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+            builder.RegisterType<ApiKeyDataProcessor>().As<IApiKeyDataProcessor>();
             builder.RegisterType<CompanyOverviewDataProcessor>().As<ICompanyOverviewDataProcessor>();
             builder.RegisterType<DataSerializer>().As<IDataSerializer>();
             builder.RegisterType<FilePurger>().As<IFilePurger>();

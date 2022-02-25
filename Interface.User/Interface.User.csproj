@@ -56,6 +56,9 @@
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BrassLoon.RestClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrassLoon.RestClient.1.0.0\lib\netstandard2.0\BrassLoon.RestClient.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -103,11 +106,12 @@
     </ApplicationDefinition>
     <Compile Include="Core\ApiKeyProcessor.cs" />
     <Compile Include="Core\CompanyOverviewFactory.cs" />
-    <Compile Include="Core\EnvironmentVariableProcessor.cs" />
+    <Compile Include="Data\ApiKeyDataProcessor.cs" />
     <Compile Include="Data\CompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\DataModule.cs" />
     <Compile Include="Data\DataSerializer.cs" />
     <Compile Include="Data\FilePurger.cs" />
+    <Compile Include="Data\IApiKeyDataProcessor.cs" />
     <Compile Include="Data\ICompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\IDataSerializer.cs" />
     <Compile Include="Data\IFilePurger.cs" />
@@ -116,7 +120,6 @@
     <Compile Include="DependencyInjection\InterfaceUserModule.cs" />
     <Compile Include="Framework\IApiKeyProcessor.cs" />
     <Compile Include="Framework\ICompanyOverviewFactory.cs" />
-    <Compile Include="Framework\IEnvironmentVariableProcessor.cs" />
     <Compile Include="Framework\ISettings.cs" />
     <Compile Include="InputValidator\ApiKeyValidator.cs" />
     <Compile Include="InputValidator\CompanyOverviewValidator.cs" />
@@ -166,18 +169,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NavigationPage\ProtoType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ApiKey.cs" />
     <Compile Include="NavigationPage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NavigationPage\ProtoType.xaml.cs">
-      <DependentUpon>ProtoType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

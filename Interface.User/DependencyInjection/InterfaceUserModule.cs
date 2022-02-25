@@ -12,7 +12,6 @@ namespace Keesh.Interface.User.DependencyInjection
             builder.RegisterType<SettingsFactory>().As<ISettingsFactory>();
             builder.RegisterType<ApiKeyProcessor>().As<IApiKeyProcessor>();
             builder.RegisterType<CompanyOverviewFactory>().As<ICompanyOverviewFactory>();
-            builder.RegisterType<EnvironmentVariableProcessor>().As<IEnvironmentVariableProcessor>();
         }
     }
 }

@@ -17,7 +17,6 @@
             <MenuItem Header="_Options">
                 <MenuItem Header="_Home" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/Home.xaml"/>
                 <MenuItem Header="Company _Overview" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/CompanyOverview.xaml"/>
-                <MenuItem Header="_Prototype" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/ProtoType.xaml"/>
                 <Separator/>
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
