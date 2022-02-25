@@ -13,6 +13,7 @@ namespace Keesh.Interface.User.Data
     public class CalendarDataProcessor : ICalendarDataProcessor
     {
         private const string EARNINGS_FILE_NAME = "earnings.csv";
+        private const string IPO_FILE_NAME = "ipo.csv";
         private const int EXPIRATION_HOURS = 12;
         private readonly IFilePurger _filePurger;
 
@@ -42,6 +43,27 @@ namespace Keesh.Interface.User.Data
             });
         }
 
+        public async Task<IEnumerable<IPOCalendarItem>> GetIpoData()
+        {
+            return await Task.Run<IEnumerable<IPOCalendarItem>>(async () =>
+            {
+                IEnumerable<IPOCalendarItem> result = null;
+                await PurgeFiles();
+                CacheDirectory.CreateCacheDirectory();
+                string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
+                if (File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    using (StreamReader reader = new StreamReader(stream, Encoding.Unicode))
+                    using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                    {
+                        result = csvReader.GetRecords<IPOCalendarItem>().ToList();
+                    }
+                }
+                return result;
+            });
+        }
+
         public async Task SaveEarningsData(IEnumerable<EarningsCalendarItem> earningsCalendarItems)
         {
             await Task.Run(() => {
@@ -62,10 +84,30 @@ namespace Keesh.Interface.User.Data
             await PurgeFiles();
         }
 
+        public async Task SaveIpoData(IEnumerable<IPOCalendarItem> earningsCalendarItems)
+        {
+            await Task.Run(() => {
+                CacheDirectory.CreateCacheDirectory();
+                string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                if (earningsCalendarItems != null)
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (StreamWriter writer = new StreamWriter(stream, Encoding.Unicode))
+                    using (CsvWriter csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture))
+                    {
+                        csvWriter.WriteRecords(earningsCalendarItems);
+                    }
+                }
+            });
+            await PurgeFiles();
+        }
+
         private async Task PurgeFiles()
         {
             DateTime expiration = DateTime.UtcNow.AddHours(-1 * EXPIRATION_HOURS);
-            await _filePurger.Purge(expiration, CacheDirectory.GetFileName(EARNINGS_FILE_NAME));
+            await _filePurger.Purge(expiration, CacheDirectory.GetFileName(EARNINGS_FILE_NAME), CacheDirectory.GetFileName(IPO_FILE_NAME));
         }
     }
 }

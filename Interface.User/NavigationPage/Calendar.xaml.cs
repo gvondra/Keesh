@@ -68,6 +68,8 @@ namespace Keesh.Interface.User.NavigationPage
                 {
                     Task.Run(() => GetEarningsCalendar(CalendarVM.ApiKey.Key))
                         .ContinueWith(GetEarningsCalendarCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
+                    Task.Run(() => GetIpoCalendar(CalendarVM.ApiKey.Key))
+                        .ContinueWith(GetIpoCalendarCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
                     Task.Run(() => SaveApiKey(CalendarVM.ApiKey));
                 }
             }
@@ -113,6 +115,34 @@ namespace Keesh.Interface.User.NavigationPage
             {
                 ICalendarFactory calendarFactory = scope.Resolve<ICalendarFactory>();
                 return (await calendarFactory.GetEarnings(key)).ToList();
+            }
+        }
+
+        private async Task GetIpoCalendarCallback(Task<List<Model.IPOCalendarItem>> task, object state)
+        {
+            try
+            {
+                CalendarVM.IpoCalendarItems.Clear();
+                using (DispatcherProcessingDisabled dpd = Dispatcher.DisableProcessing())
+                foreach (Model.IPOCalendarItem item in await task)
+                {
+                    CalendarVM.IpoCalendarItems.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow.Open(ex, Window.GetWindow(this));
+            }
+        }
+
+        private async Task<List<Model.IPOCalendarItem>> GetIpoCalendar(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentNullException(nameof(key));
+            using (ILifetimeScope scope = _container.BeginLifetimeScope())
+            {
+                ICalendarFactory calendarFactory = scope.Resolve<ICalendarFactory>();
+                return (await calendarFactory.GetIPO(key)).ToList();
             }
         }
     }

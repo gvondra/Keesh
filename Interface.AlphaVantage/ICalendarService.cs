@@ -9,5 +9,6 @@ namespace Keesh.Interface.AlphaVantage
     public interface ICalendarService
     {
         Task<List<EarningsCalendarItem>> GetEarningsCalendar(ISettings settings, string apiKey);
+        Task<List<IPOCalendarItem>> GetIpoCalendar(ISettings settings, string apiKey);
     }
 }

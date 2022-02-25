@@ -23,15 +23,32 @@
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=ApiKey.Key, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
             <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" MinWidth="50" Click="LoadButton_Click">_Load</Button>
         </Grid>
-        <DataGrid x:Name="EarningsCalendar" ItemsSource="{Binding Path=EarningsCalendarItems}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" />
-                <DataGridTextColumn Header="Name"  Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Report Date" Binding="{Binding ReportDate, StringFormat='yyyy-MM-dd'}" />
-                <DataGridTextColumn Header="Fiscal Period End Date" Binding="{Binding FiscalDateEnding, StringFormat='yyyy-MM-dd'}" />
-                <DataGridTextColumn Header="Estimate"  Binding="{Binding Estimate}"/>
-                <DataGridTextColumn Header="Currency"  Binding="{Binding Currency}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <TabControl>
+            <TabItem Header="Earnings">
+                <DataGrid x:Name="EarningsCalendar" ItemsSource="{Binding Path=EarningsCalendarItems}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" />
+                        <DataGridTextColumn Header="Name"  Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Report Date" Binding="{Binding ReportDate, StringFormat='yyyy-MM-dd'}" />
+                        <DataGridTextColumn Header="Fiscal Period End Date" Binding="{Binding FiscalDateEnding, StringFormat='yyyy-MM-dd'}" />
+                        <DataGridTextColumn Header="Estimate"  Binding="{Binding Estimate}"/>
+                        <DataGridTextColumn Header="Currency"  Binding="{Binding Currency}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="IPO's">
+                <DataGrid x:Name="IpoCalendar" ItemsSource="{Binding Path=IpoCalendarItems}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" />
+                        <DataGridTextColumn Header="Name"  Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='yyyy-MM-dd'}" />
+                        <DataGridTextColumn Header="Price Range Low"  Binding="{Binding PriceRangeLow}"/>
+                        <DataGridTextColumn Header="Price Range High"  Binding="{Binding PriceRangeHigh}"/>
+                        <DataGridTextColumn Header="Currency"  Binding="{Binding Currency}"/>
+                        <DataGridTextColumn Header="Exchange"  Binding="{Binding Exchange}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>        
     </DockPanel>
 </Page>

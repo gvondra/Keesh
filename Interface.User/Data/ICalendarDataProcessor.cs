@@ -11,5 +11,7 @@ namespace Keesh.Interface.User.Data
     {
         Task<IEnumerable<EarningsCalendarItem>> GetEarningsData();
         Task SaveEarningsData(IEnumerable<EarningsCalendarItem> earningsCalendarItems);
+        Task<IEnumerable<IPOCalendarItem>> GetIpoData();
+        Task SaveIpoData(IEnumerable<IPOCalendarItem> earningsCalendarItems);
     }
 }

@@ -10,5 +10,6 @@ namespace Keesh.Interface.User.Framework
     public interface ICalendarFactory
     {
         Task<IEnumerable<EarningsCalendarItem>> GetEarnings(string apiKey);
+        Task<IEnumerable<IPOCalendarItem>> GetIPO(string apiKey);
     }
 }

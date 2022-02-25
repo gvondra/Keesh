@@ -16,6 +16,7 @@ namespace Keesh.Interface.User.ViewModel
         private readonly ConcurrentDictionary<string, string> _errors = new ConcurrentDictionary<string, string>();
         private ApiKeyVM _apiKeyVM;
         private ObservableCollection<Model.EarningsCalendarItem> _earningsCalendarItems = new ObservableCollection<Model.EarningsCalendarItem>();
+        private ObservableCollection<Model.IPOCalendarItem> _ipoCalendarItems = new ObservableCollection<Model.IPOCalendarItem>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,6 +33,11 @@ namespace Keesh.Interface.User.ViewModel
         public ObservableCollection<Model.EarningsCalendarItem> EarningsCalendarItems
         {
             get => _earningsCalendarItems;
+        }
+
+        public ObservableCollection<Model.IPOCalendarItem> IpoCalendarItems
+        {
+            get => _ipoCalendarItems;
         }
 
         public string Error => throw new NotImplementedException();

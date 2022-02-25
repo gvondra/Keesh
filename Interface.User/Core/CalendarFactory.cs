@@ -43,5 +43,21 @@ namespace Keesh.Interface.User.Core
             }
             return earningsCalendar.OrderBy(i => i.ReportDate);
         }
+
+        public async Task<IEnumerable<IPOCalendarItem>> GetIPO(string apiKey)
+        {
+            IEnumerable<IPOCalendarItem> ipoCalendar = await _dataProcessor.GetIpoData();
+            if (ipoCalendar == null)
+            {
+                List<AlphaVantageModels.IPOCalendarItem> calendarAlphaVantage = await _calendarService.GetIpoCalendar(_settingsFactory.CreateAlphaVantage(), apiKey);
+                if (calendarAlphaVantage != null)
+                {
+                    IMapper mapper = new Mapper(Mapping.Configuration.MapperConfigurationAlphaVantage);
+                    ipoCalendar = calendarAlphaVantage.Select<AlphaVantageModels.IPOCalendarItem, IPOCalendarItem>(i => mapper.Map<IPOCalendarItem>(i));
+                    await _dataProcessor.SaveIpoData(ipoCalendar);
+                }
+            }
+            return ipoCalendar.OrderBy(i => i.Date);
+        }
     }
 }

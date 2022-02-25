@@ -136,6 +136,7 @@
     <Compile Include="Mapping\Configuration.cs" />
     <Compile Include="Model\EarningsCalendarItem.cs" />
     <Compile Include="Model\CompanyOverview.cs" />
+    <Compile Include="Model\IPOCalendarItem.cs" />
     <Compile Include="NavigationPage\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
     </Compile>

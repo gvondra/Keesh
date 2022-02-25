@@ -35,5 +35,19 @@ namespace Keesh.Interface.AlphaVantage
                 return (csvReader.GetRecords<EarningsCalendarItem>()).ToList();
             }
         }
+
+        public async Task<List<IPOCalendarItem>> GetIpoCalendar(ISettings settings, string apiKey)
+        {
+            UriBuilder uriBuilder = new UriBuilder(settings.BaseAddress);
+            uriBuilder.Path = "query";
+            uriBuilder.Query = $"function=IPO_CALENDAR&apikey={HttpUtility.UrlEncode(apiKey)}";
+            IRequest request = _service.CreateRequest(uriBuilder.Uri, HttpMethod.Get);
+            IResponse response = await _service.Send(request);
+            using (StreamReader reader = new StreamReader(await response.Message.Content.ReadAsStreamAsync()))
+            using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+            {
+                return (csvReader.GetRecords<IPOCalendarItem>()).ToList();
+            }
+        }
     }
 }
