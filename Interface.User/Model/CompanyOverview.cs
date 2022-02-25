@@ -22,7 +22,7 @@ namespace Keesh.Interface.User.Model
         public DateTime? LatestQuarter { get; set; } 
         public decimal? MarketCapitalization { get; set; } 
         public decimal? EBITDA { get; set; } 
-        public decimal? PERatio { get; set; } 
+        public string PERatio { get; set; } 
         public decimal? PEGRatio { get; set; } 
         public decimal? BookValue { get; set; } 
         public decimal? DividendPerShare { get; set; } 
@@ -39,7 +39,7 @@ namespace Keesh.Interface.User.Model
         public decimal? QuarterlyEarningsGrowthYOY { get; set; } 
         public decimal? QuarterlyRevenueGrowthYOY { get; set; } 
         public decimal? AnalystTargetPrice { get; set; } 
-        public decimal? TrailingPE { get; set; } 
+        public string TrailingPE { get; set; } 
         public decimal? ForwardPE { get; set; } 
         public decimal? PriceToSalesRatioTTM { get; set; } 
         public string PriceToBookRatio { get; set; } 

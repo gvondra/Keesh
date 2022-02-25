@@ -30,7 +30,7 @@ namespace Keesh.Interface.User.ViewModel
         private DateTime? _latestQuarter;
         private decimal? _marketCapitalization;
         private decimal? _ebitda;
-        private decimal? _peRatio;
+        private string _peRatio;
         private decimal? _pegRatio;
         private decimal? _bookValue;
         private decimal? _dividendPerShare;
@@ -47,7 +47,7 @@ namespace Keesh.Interface.User.ViewModel
         private decimal? _quarterlyEarningsGrowthYOY;
         private decimal? _quarterlyRevenueGrowthYOY;
         private decimal? _analystTargetPrice;
-        private decimal? _trailingPE;
+        private string _trailingPE;
         private decimal? _forwardPE;
         private decimal? _priceToSalesRatioTTM;
         private string _priceToBookRatio;
@@ -260,7 +260,7 @@ namespace Keesh.Interface.User.ViewModel
                 }
             }
         }
-        public decimal? PERatio
+        public string PERatio
         {
             get => _peRatio;
             set
@@ -464,7 +464,7 @@ namespace Keesh.Interface.User.ViewModel
                 }
             }
         }
-        public decimal? TrailingPE
+        public string TrailingPE
         {
             get => _trailingPE;
             set
