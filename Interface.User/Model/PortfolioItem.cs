@@ -14,9 +14,7 @@ namespace Keesh.Interface.User.Model
         public decimal? Principal { get; set; }
         public decimal? Equity { get; set; }
         public decimal? RecurringInvestment { get; set; }
-        public decimal? MainAnnualReturn { get; set; }
-        public decimal? EquityRatio { get; set; }
+        public decimal? MeanAnnualReturn { get; set; }
         public decimal? TargetEquityRatio { get; set; }
-        public decimal? Rebalance { get; set; }
     }
 }

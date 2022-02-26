@@ -9,8 +9,9 @@ namespace Keesh.Interface.User.Data
             builder.RegisterType<ApiKeyDataProcessor>().As<IApiKeyDataProcessor>();
             builder.RegisterType<CalendarDataProcessor>().As<ICalendarDataProcessor>();
             builder.RegisterType<CompanyOverviewDataProcessor>().As<ICompanyOverviewDataProcessor>();
-            builder.RegisterType<DataSerializer>().As<IDataSerializer>();
-            builder.RegisterType<FilePurger>().As<IFilePurger>();
+            builder.RegisterType<DataSerializer>().SingleInstance().As<IDataSerializer>();
+            builder.RegisterType<FilePurger>().SingleInstance().As<IFilePurger>();
+            builder.RegisterType<PortfolioDataProcessor>().As<IPortfolioDataProcessor>();
             builder.RegisterType<PriceDataProcessor>().As<IPriceDataProcessor>();
         }
     }

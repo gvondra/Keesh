@@ -20,6 +20,8 @@ namespace Keesh.Interface.User.Mapping
                 configExp.CreateMap<Model.ApiKey, ViewModel.ApiKeyVM>();
                 configExp.CreateMap<ViewModel.ApiKeyVM, Model.ApiKey>();
                 configExp.CreateMap<Model.CompanyOverview, ViewModel.CompanyOverviewVM>();
+                configExp.CreateMap<Model.PortfolioItem, ViewModel.PortfolioItemVM>();
+                configExp.CreateMap<ViewModel.PortfolioItemVM, Model.PortfolioItem>();
             });
 
             _mapperConfigurationAlphaVantage = new MapperConfiguration(configExp =>
