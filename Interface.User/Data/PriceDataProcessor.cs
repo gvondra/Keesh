@@ -1,44 +1,48 @@
 ﻿using Keesh.Interface.User.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Keesh.Interface.User.Data
 {
-    public class CompanyOverviewDataProcessor : ICompanyOverviewDataProcessor
+    public class PriceDataProcessor : IPriceDataProcessor
     {
+        private const string DAILY_INDEX_FILE_NAME = "daily-prices.json";
         private const int EXPIRATION_HOURS = 8;
-        private const string INDEX_FILE_NAME = "CompanyOverview.json";
         private readonly IDataSerializer _dataSerializer;
         private readonly IFilePurger _filePurger;
 
-        public CompanyOverviewDataProcessor(IDataSerializer dataSerializer,
-            IFilePurger filePurger)
+        public PriceDataProcessor(IFilePurger filePurger,
+            IDataSerializer dataSerializer)
         {
-            _dataSerializer = dataSerializer;
             _filePurger = filePurger;
+            _dataSerializer = dataSerializer;   
         }
 
-        public async Task<CompanyOverview> Get(string symbol)
+        public async Task<IEnumerable<PriceItem>> GetDaily(string symbol)
         {
-            CompanyOverview result = null;
-            string indexFileName = GetIndexFileName();
+            CacheDirectory.CreateCacheDirectory();
+            IEnumerable<PriceItem> result = null;
+            string indexFileName = CacheDirectory.GetFileName(DAILY_INDEX_FILE_NAME);
             Dictionary<string, string> index = await _dataSerializer.LoadJsonData<Dictionary<string, string>>(indexFileName);
-            await PurgeFiles(index);
             if (index != null && index.ContainsKey(symbol))
             {
-                result = await _dataSerializer.LoadJsonData<CompanyOverview>(GetDataFileName(index[symbol]));
+                await PurgeFiles(index);
+                if (index != null && index.ContainsKey(symbol))
+                {
+                    string fileName = GetDataFileName(index[symbol]);
+                    result = await _dataSerializer.LoadCsvData<PriceItem>(fileName);
+                }
             }
             return result;
         }
 
-        public async Task Save(string symbol, CompanyOverview data)
+        public async Task SaveDaily(string symbol, IEnumerable<PriceItem> items)
         {
             CacheDirectory.CreateCacheDirectory();
-            string indexFileName = GetIndexFileName();
+            string indexFileName = CacheDirectory.GetFileName(DAILY_INDEX_FILE_NAME);
             Dictionary<string, string> index = await _dataSerializer.LoadJsonData<Dictionary<string, string>>(indexFileName);
             if (index == null)
                 index = new Dictionary<string, string>();
@@ -47,23 +51,17 @@ namespace Keesh.Interface.User.Data
                 index[symbol] = Guid.NewGuid().ToString("N");
                 await _dataSerializer.SaveJsonData(indexFileName, index);
             }
-            await _dataSerializer.SaveJsonData(GetDataFileName(index[symbol]), data);
+            await _dataSerializer.SaveCsvData(GetDataFileName(index[symbol]), items);
             await PurgeFiles(index);
         }
 
         private async Task PurgeFiles(Dictionary<string, string> index)
         {
-            if (index != null)
-            {
-                DateTime expiration = DateTime.UtcNow.AddHours(-1 * EXPIRATION_HOURS);
-                await _filePurger.Purge(expiration, index.Select(kv => GetDataFileName(kv.Value)));
-            }
+            DateTime expiration = DateTime.UtcNow.AddHours(-1 * EXPIRATION_HOURS);
+            await _filePurger.Purge(expiration, index.Select(kv => GetDataFileName(kv.Value)));
         }
 
         private string GetDataFileName(string guid)
-            => CacheDirectory.GetFileName($"{guid}.json");
-
-        private string GetIndexFileName()
-            => CacheDirectory.GetFileName(INDEX_FILE_NAME);
+            => CacheDirectory.GetFileName($"{guid}.csv");
     }
 }

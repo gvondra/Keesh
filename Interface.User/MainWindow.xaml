@@ -16,6 +16,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Options">
                 <MenuItem Header="_Home" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/Home.xaml"/>
+                <MenuItem Header="_Price History" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/PriceHistory.xaml" />
                 <MenuItem Header="_Calendar" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/Calendar.xaml" />
                 <MenuItem Header="Company _Overview" Command="NavigationCommands.GoToPage" CommandParameter="NavigationPage/CompanyOverview.xaml"/>
                 <Separator/>

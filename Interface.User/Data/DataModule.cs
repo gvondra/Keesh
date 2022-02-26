@@ -11,6 +11,7 @@ namespace Keesh.Interface.User.Data
             builder.RegisterType<CompanyOverviewDataProcessor>().As<ICompanyOverviewDataProcessor>();
             builder.RegisterType<DataSerializer>().As<IDataSerializer>();
             builder.RegisterType<FilePurger>().As<IFilePurger>();
+            builder.RegisterType<PriceDataProcessor>().As<IPriceDataProcessor>();
         }
     }
 }

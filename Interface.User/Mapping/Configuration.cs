@@ -27,6 +27,7 @@ namespace Keesh.Interface.User.Mapping
                 configExp.CreateMap<AlphaVantageModels.CompanyOverview, Model.CompanyOverview>();
                 configExp.CreateMap<AlphaVantageModels.EarningsCalendarItem, Model.EarningsCalendarItem>();
                 configExp.CreateMap<AlphaVantageModels.IPOCalendarItem, Model.IPOCalendarItem>();
+                configExp.CreateMap<AlphaVantageModels.PriceItem, Model.PriceItem>();
             });
         }
 

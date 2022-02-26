@@ -1,9 +1,6 @@
-﻿using CsvHelper;
-using Keesh.Interface.User.Model;
+﻿using Keesh.Interface.User.Model;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,91 +13,44 @@ namespace Keesh.Interface.User.Data
         private const string IPO_FILE_NAME = "ipo.csv";
         private const int EXPIRATION_HOURS = 12;
         private readonly IFilePurger _filePurger;
+        private readonly IDataSerializer _dataSerializer;
 
-        public CalendarDataProcessor(IFilePurger filePurger)
+        public CalendarDataProcessor(IFilePurger filePurger,
+            IDataSerializer dataSerializer)
         {
             _filePurger = filePurger;
+            _dataSerializer = dataSerializer;
         }
 
         public async Task<IEnumerable<EarningsCalendarItem>> GetEarningsData()
         {
-            return await Task.Run<IEnumerable<EarningsCalendarItem>>(async () =>
-            {
-                IEnumerable<EarningsCalendarItem> result = null;
-                await PurgeFiles();
-                CacheDirectory.CreateCacheDirectory();
-                string fileName = CacheDirectory.GetFileName(EARNINGS_FILE_NAME);
-                if (File.Exists(fileName))
-                {
-                    using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    using (StreamReader reader = new StreamReader(stream, Encoding.Unicode))
-                    using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
-                    {
-                        result = csvReader.GetRecords<EarningsCalendarItem>().ToList();
-                    }
-                }
-                return result;
-            });
+            await PurgeFiles();
+            CacheDirectory.CreateCacheDirectory();
+            string fileName = CacheDirectory.GetFileName(EARNINGS_FILE_NAME);
+            return await _dataSerializer.LoadCsvData<EarningsCalendarItem>(fileName);
         }
 
         public async Task<IEnumerable<IPOCalendarItem>> GetIpoData()
         {
-            return await Task.Run<IEnumerable<IPOCalendarItem>>(async () =>
-            {
-                IEnumerable<IPOCalendarItem> result = null;
-                await PurgeFiles();
-                CacheDirectory.CreateCacheDirectory();
-                string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
-                if (File.Exists(fileName))
-                {
-                    using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    using (StreamReader reader = new StreamReader(stream, Encoding.Unicode))
-                    using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
-                    {
-                        result = csvReader.GetRecords<IPOCalendarItem>().ToList();
-                    }
-                }
-                return result;
-            });
+            await PurgeFiles();
+            CacheDirectory.CreateCacheDirectory();
+            string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
+            return await _dataSerializer.LoadCsvData<IPOCalendarItem>(fileName);
         }
 
         public async Task SaveEarningsData(IEnumerable<EarningsCalendarItem> earningsCalendarItems)
         {
-            await Task.Run(() => {
-                CacheDirectory.CreateCacheDirectory();
-                string fileName = CacheDirectory.GetFileName(EARNINGS_FILE_NAME);
-                if (File.Exists(fileName))
-                    File.Delete(fileName);
-                if (earningsCalendarItems != null)
-                {
-                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
-                    using (StreamWriter writer = new StreamWriter(stream, Encoding.Unicode))
-                    using (CsvWriter csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture))
-                    {
-                        csvWriter.WriteRecords(earningsCalendarItems);
-                    }
-                }
-            });
+            CacheDirectory.CreateCacheDirectory();
+            string fileName = CacheDirectory.GetFileName(EARNINGS_FILE_NAME);
+            await _dataSerializer.SaveCsvData(fileName, earningsCalendarItems);
             await PurgeFiles();
         }
 
         public async Task SaveIpoData(IEnumerable<IPOCalendarItem> earningsCalendarItems)
         {
-            await Task.Run(() => {
-                CacheDirectory.CreateCacheDirectory();
-                string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
-                if (File.Exists(fileName))
-                    File.Delete(fileName);
-                if (earningsCalendarItems != null)
-                {
-                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
-                    using (StreamWriter writer = new StreamWriter(stream, Encoding.Unicode))
-                    using (CsvWriter csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture))
-                    {
-                        csvWriter.WriteRecords(earningsCalendarItems);
-                    }
-                }
-            });
+            CacheDirectory.CreateCacheDirectory();
+            string fileName = CacheDirectory.GetFileName(IPO_FILE_NAME);
+            await _dataSerializer.SaveCsvData(fileName, earningsCalendarItems);
             await PurgeFiles();
         }
 

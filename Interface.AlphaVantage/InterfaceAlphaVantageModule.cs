@@ -10,6 +10,7 @@ namespace Keesh.Interface.AlphaVantage
             builder.RegisterType<Service>().As<IService>();
             builder.RegisterType<CalendarService>().As<ICalendarService>();
             builder.RegisterType<FundamentalDataService>().As<IFundamentalDataService>();
+            builder.RegisterType<PriceService>().As<IPriceService>();
         }
     }
 }

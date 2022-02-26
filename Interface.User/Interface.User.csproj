@@ -113,6 +113,7 @@
     <Compile Include="Core\ApiKeyProcessor.cs" />
     <Compile Include="Core\CalendarFactory.cs" />
     <Compile Include="Core\CompanyOverviewFactory.cs" />
+    <Compile Include="Core\PriceFactory.cs" />
     <Compile Include="Data\ApiKeyDataProcessor.cs" />
     <Compile Include="Data\CacheDirectory.cs" />
     <Compile Include="Data\CalendarDataProcessor.cs" />
@@ -125,23 +126,35 @@
     <Compile Include="Data\ICompanyOverviewDataProcessor.cs" />
     <Compile Include="Data\IDataSerializer.cs" />
     <Compile Include="Data\IFilePurger.cs" />
+    <Compile Include="Data\IPriceDataProcessor.cs" />
+    <Compile Include="Data\PriceDataProcessor.cs" />
     <Compile Include="DependencyInjection\ContainerFactory.cs" />
     <Compile Include="DependencyInjection\InterfaceUserModule.cs" />
     <Compile Include="Framework\IApiKeyProcessor.cs" />
     <Compile Include="Framework\ICalendarFactory.cs" />
     <Compile Include="Framework\ICompanyOverviewFactory.cs" />
+    <Compile Include="Framework\IPriceFactory.cs" />
     <Compile Include="Framework\ISettings.cs" />
     <Compile Include="InputValidator\ApiKeyValidator.cs" />
     <Compile Include="InputValidator\CompanyOverviewValidator.cs" />
+    <Compile Include="InputValidator\PriceHistoryValidator.cs" />
     <Compile Include="Mapping\Configuration.cs" />
     <Compile Include="Model\EarningsCalendarItem.cs" />
     <Compile Include="Model\CompanyOverview.cs" />
     <Compile Include="Model\IPOCalendarItem.cs" />
+    <Compile Include="Model\PortfolioItem.cs" />
+    <Compile Include="Model\PriceItem.cs" />
     <Compile Include="NavigationPage\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="NavigationPage\CompanyOverview.xaml.cs">
       <DependentUpon>CompanyOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationPage\Portfolio.xaml.cs">
+      <DependentUpon>Portfolio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationPage\PriceHistory.xaml.cs">
+      <DependentUpon>PriceHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\AlphaVantageSettings.cs" />
     <Compile Include="Settings\ISettingsFactory.cs" />
@@ -150,6 +163,8 @@
     <Compile Include="ViewModel\ApiKeyVM.cs" />
     <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\CompanyOverviewVM.cs" />
+    <Compile Include="ViewModel\PortfolioVM.cs" />
+    <Compile Include="ViewModel\PriceHistoryVM.cs" />
     <Page Include="Control\ExceptionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +200,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NavigationPage\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NavigationPage\Portfolio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NavigationPage\PriceHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
