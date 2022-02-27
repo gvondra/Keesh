@@ -168,6 +168,7 @@
     <Compile Include="ViewBehavior\PortfolioItemBehavior.cs" />
     <Compile Include="ViewBehavior\PortfolioItemPriceLookup.cs" />
     <Compile Include="ViewBehavior\PortfolioRebalanceCalculator.cs" />
+    <Compile Include="ViewBehavior\PortfolioScheduleCalculator.cs" />
     <Compile Include="ViewModel\ApiKeyVM.cs" />
     <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\CompanyOverviewVM.cs" />

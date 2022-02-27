@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Keesh.Interface.User.ViewModel
         private readonly ConcurrentDictionary<string, string> _errors = new ConcurrentDictionary<string, string>();
         private readonly ObservableCollection<PortfolioItemVM> _items = new ObservableCollection<PortfolioItemVM>();
         private ApiKeyVM _apiKeyVM;
+        private DataTable _schedule;
+        private int _scheduleTerm = 12;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,6 +27,7 @@ namespace Keesh.Interface.User.ViewModel
         {
             _behaviors.Add(new PortfolioEquityRatioCalculator(this));
             _behaviors.Add(new PortfolioRebalanceCalculator(this));
+            _behaviors.Add(new PortfolioScheduleCalculator(this));
         }
 
         public ApiKeyVM ApiKey
@@ -33,6 +37,29 @@ namespace Keesh.Interface.User.ViewModel
             {
                 _apiKeyVM = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        public DataTable Schedule
+        {
+            get => _schedule;
+            set
+            {
+                _schedule = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int SheduleTerm
+        {
+            get => _scheduleTerm;
+            set
+            {
+                if (value >= 0 && _scheduleTerm != value)
+                {
+                    _scheduleTerm = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
 

@@ -18,7 +18,7 @@
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Padding="5,0,5,5">
                 <TextBlock>Ticker Symbol</TextBlock>
                 <LineBreak/>
-                <TextBox Text="{Binding Path=ApiKey.Key, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="250" />
+                <TextBox Text="{Binding Path=ApiKey.Key, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" MinWidth="200" />
             </TextBlock>
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink Command="ApplicationCommands.Open">Open Portfolio</Hyperlink>
@@ -26,75 +26,94 @@
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink Command="ApplicationCommands.Save">Save Portfolio</Hyperlink>
             </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Padding="5">
+                <TextBlock>Schedule Terms</TextBlock>
+                <LineBreak/>
+                <TextBox Text="{Binding Path=SheduleTerm, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  MinWidth="200" />
+            </TextBlock>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Path=Items}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Symbol"  Binding="{Binding Path=Symbol, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Price"  Binding="{Binding Path=Price, StringFormat='###,###,###.###', UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
+        <TabControl>
+            <TabItem Header="Holdings">
+                <DataGrid ItemsSource="{Binding Path=Items}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Symbol"  Binding="{Binding Path=Symbol, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn Header="Price"  Binding="{Binding Path=Price, StringFormat='###,###,###.###', UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Shares"  Binding="{Binding Path=Shares, StringFormat='###,###,##0.######', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Principal"  Binding="{Binding Path=Principal, StringFormat='###,###,##0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Equity"  Binding="{Binding Path=Equity, StringFormat='###,###,##0.00'}" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    <Setter Property="Foreground" Value="{Binding ForegroundColor}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Recurring Investment"  Binding="{Binding Path=RecurringInvestment, StringFormat='###,###,##0.00', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Mean Annual Return"  Binding="{Binding Path=MeanAnnualReturn, StringFormat='#0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Equity Ratio"  Binding="{Binding Path=EquityRatio, StringFormat='#0.00#'}" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Target Equity Ratio"  Binding="{Binding Path=TargetEquityRatio, StringFormat='#0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Rebalance"  Binding="{Binding Path=Rebalance}" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Schedule">
+                <DataGrid ItemsSource="{Binding Path=Schedule}" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True" HeadersVisibility="None">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="10,0,0,0"/>
                         </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Shares"  Binding="{Binding Path=Shares, StringFormat='###,###,##0.######', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Principal"  Binding="{Binding Path=Principal, StringFormat='###,###,##0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Equity"  Binding="{Binding Path=Equity, StringFormat='###,###,##0.00'}" IsReadOnly="True">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                            <Setter Property="Foreground" Value="{Binding ForegroundColor}"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Recurring Investment"  Binding="{Binding Path=RecurringInvestment, StringFormat='###,###,##0.00', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Mean Annual Return"  Binding="{Binding Path=MeanAnnualReturn, StringFormat='#0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Equity Ratio"  Binding="{Binding Path=EquityRatio, StringFormat='#0.00#'}" IsReadOnly="True">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Target Equity Ratio"  Binding="{Binding Path=TargetEquityRatio, StringFormat='#0.00#', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Rebalance"  Binding="{Binding Path=Rebalance}" IsReadOnly="True">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    </DataGrid.CellStyle>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Page>
