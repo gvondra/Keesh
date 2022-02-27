@@ -26,11 +26,20 @@
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink Command="ApplicationCommands.Save">Save Portfolio</Hyperlink>
             </TextBlock>
-            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Padding="5">
-                <TextBlock>Schedule Terms</TextBlock>
-                <LineBreak/>
-                <TextBox Text="{Binding Path=SheduleTerm, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  MinWidth="200" />
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" Padding="5,5,5,0">
+                <TextBlock>Schedule Terms </TextBlock>
+                <TextBox Text="{Binding Path=SheduleTerm, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  MinWidth="50" MaxLength="3" />
             </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" Padding="5,5,5,0">
+                <TextBlock>Start Month </TextBlock>
+                <TextBox Text="{Binding Path=StartMonth, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  MinWidth="50" MaxLength="3" />
+            </TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Principal: <TextBlock Text="{Binding TotalPrincipal, StringFormat='###,###,##0.00'}"/></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Equity: <TextBlock Text="{Binding TotalEquity, StringFormat='###,###,##0.00'}" Foreground="{Binding TotalEquityColor}"/></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Recurring Investment: <TextBlock Text="{Binding TotalRecurringInvestment, StringFormat='###,###,##0.00'}" /></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Equity Ratio: <TextBlock Text="{Binding TotalEquityRatio, StringFormat='###,###,##0.00#'}" /></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Target Equity Ratio: <TextBlock Text="{Binding TotalTargetEquityRatio, StringFormat='###,###,##0.00#'}" /></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Rebalance: <TextBlock Text="{Binding TotalRebalance, StringFormat='###,###,##0.00'}" /></TextBlock>
         </StackPanel>
         <TabControl>
             <TabItem Header="Holdings">

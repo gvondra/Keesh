@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Keesh.Interface.User.ViewModel
 {
@@ -20,11 +21,21 @@ namespace Keesh.Interface.User.ViewModel
         private ApiKeyVM _apiKeyVM;
         private DataTable _schedule;
         private int _scheduleTerm = 12;
+        private decimal _totalPrincipal = 0.0M;
+        private decimal _totalEquity = 0.0M;
+        private decimal _totalRecurringInvestment = 0.0M;
+        private decimal _totalEquityRatio = 0.0M;
+        private decimal _totalTargetEquityRatio = 0.0M;
+        private decimal _totalRebalance = 0.0M;
+        private Brush _totalEquityColor = Brushes.Black;
+        private int _startMonth;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PortfolioVM()
         {
+            _startMonth = (DateTime.Now.Month + 11) % 12;
+            _behaviors.Add(new PortfolioBehavior(this));
             _behaviors.Add(new PortfolioEquityRatioCalculator(this));
             _behaviors.Add(new PortfolioRebalanceCalculator(this));
             _behaviors.Add(new PortfolioScheduleCalculator(this));
@@ -47,6 +58,107 @@ namespace Keesh.Interface.User.ViewModel
             {
                 _schedule = value;
                 NotifyPropertyChanged();
+            }
+        }
+        
+        public decimal TotalPrincipal
+        {
+            get => _totalPrincipal;
+            set
+            {
+                if (_totalPrincipal != value)
+                {
+                    _totalPrincipal = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public Brush TotalEquityColor
+        {
+            get => _totalEquityColor;
+            set
+            {
+                _totalEquityColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public decimal TotalEquity
+        {
+            get => _totalEquity;
+            set
+            {
+                if (_totalEquity != value)
+                {
+                    _totalEquity = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public decimal TotalRecurringInvestment
+        {
+            get => _totalRecurringInvestment;
+            set
+            {
+                if (_totalRecurringInvestment != value)
+                {
+                    _totalRecurringInvestment = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public decimal TotalEquityRatio
+        {
+            get => _totalEquityRatio;
+            set
+            {
+                if (_totalEquityRatio != value)
+                {
+                    _totalEquityRatio = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public decimal TotalTargetEquityRatio
+        {
+            get => _totalTargetEquityRatio;
+            set
+            {
+                if (_totalTargetEquityRatio != value)
+                {
+                    _totalTargetEquityRatio = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public decimal TotalRebalance
+        {
+            get => _totalRebalance;
+            set
+            {
+                if (_totalRebalance != value)
+                {
+                    _totalRebalance = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public int StartMonth
+        {
+            get => _startMonth;
+            set
+            {
+                if (_startMonth != value)
+                {
+                    _startMonth = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
 

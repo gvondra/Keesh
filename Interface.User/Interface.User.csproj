@@ -164,6 +164,7 @@
     <Compile Include="Settings\ISettingsFactory.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingsFactory.cs" />
+    <Compile Include="ViewBehavior\PortfolioBehavior.cs" />
     <Compile Include="ViewBehavior\PortfolioEquityRatioCalculator.cs" />
     <Compile Include="ViewBehavior\PortfolioItemBehavior.cs" />
     <Compile Include="ViewBehavior\PortfolioItemPriceLookup.cs" />

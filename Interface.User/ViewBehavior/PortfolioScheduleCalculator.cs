@@ -23,6 +23,7 @@ namespace Keesh.Interface.User.ViewBehavior
         {
             switch (e.PropertyName)
             {
+                case nameof(PortfolioVM.StartMonth):
                 case nameof(PortfolioVM.SheduleTerm):
                     Calculate();
                     break;
@@ -71,7 +72,7 @@ namespace Keesh.Interface.User.ViewBehavior
             decimal termTotal;
             decimal termValue;
             int termTotalIndex = TotalColumnCount() - 1;
-            int term = DateTime.Today.Month;
+            int term = Math.Abs(_portfolio.StartMonth);
             // start j at 1 to skip the header
             for (int j = rowStart; j < table.Rows.Count; j += 1)
             {
@@ -92,7 +93,7 @@ namespace Keesh.Interface.User.ViewBehavior
                 table.Rows[j][termTotalIndex] = termTotal;
                 term += 1;
             }
-        }
+        }        
 
         private decimal GetScheduleValue(PortfolioItemVM portfolioItem, decimal previousTermValue)
         {
