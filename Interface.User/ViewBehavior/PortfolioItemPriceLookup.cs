@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Keesh.Interface.User.ViewBehavior
 {
@@ -40,6 +41,7 @@ namespace Keesh.Interface.User.ViewBehavior
 
         private void UpdatePrice()
         {
+            _portfolioItem.PriceBackground = Brushes.Goldenrod;
             Task.Run(() => GetPrice(_portfolioItem.Symbol))
                 .ContinueWith(UpdatePriceCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -56,6 +58,7 @@ namespace Keesh.Interface.User.ViewBehavior
         private async Task UpdatePriceCallback(Task<Model.PriceItem> task, object state)
         {
             Model.PriceItem priceItem = await task;
+            _portfolioItem.PriceBackground = Brushes.White;
             if (priceItem != null)
             {
                 _portfolioItem.Price = priceItem.Close;
