@@ -10,7 +10,7 @@ namespace Keesh.Interface.User.Data
     public class PriceDataProcessor : IPriceDataProcessor
     {
         private const string DAILY_INDEX_FILE_NAME = "daily-prices.json";
-        private const int EXPIRATION_HOURS = 8;
+        private const int EXPIRATION_HOURS = 4;
         private readonly IDataSerializer _dataSerializer;
         private readonly IFilePurger _filePurger;
 
