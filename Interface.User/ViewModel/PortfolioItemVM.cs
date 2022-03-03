@@ -17,7 +17,7 @@ namespace Keesh.Interface.User.ViewModel
         private readonly ConcurrentDictionary<string, string> _errors = new ConcurrentDictionary<string, string>();
         private string _symbol;
         private decimal? _price;
-        private Brush _priceBackground = Brushes.White;
+        private Brush _priceBackground = Brushes.Transparent;
         private decimal? _shares;
         private decimal? _principal;
         private decimal? _equity;

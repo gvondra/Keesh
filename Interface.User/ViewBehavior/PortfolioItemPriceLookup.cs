@@ -58,7 +58,7 @@ namespace Keesh.Interface.User.ViewBehavior
         private async Task UpdatePriceCallback(Task<Model.PriceItem> task, object state)
         {
             Model.PriceItem priceItem = await task;
-            _portfolioItem.PriceBackground = Brushes.White;
+            _portfolioItem.PriceBackground = Brushes.Transparent;
             if (priceItem != null)
             {
                 _portfolioItem.Price = priceItem.Close;
