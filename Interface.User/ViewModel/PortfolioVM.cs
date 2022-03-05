@@ -29,6 +29,8 @@ namespace Keesh.Interface.User.ViewModel
         private decimal _totalRebalance = 0.0M;
         private Brush _totalEquityColor = Brushes.Black;
         private int _startMonth;
+        private string _fileName;
+        private string _filePath;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,6 +60,32 @@ namespace Keesh.Interface.User.ViewModel
             {
                 _schedule = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        public string FileName
+        {
+            get => _fileName;
+            set
+            {
+                if (_fileName != value)
+                {
+                    _fileName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string FilePath
+        {
+            get => _filePath;
+            set
+            {
+                if (_filePath != value)
+                {
+                    _filePath = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
         

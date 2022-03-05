@@ -27,6 +27,19 @@
                 <Hyperlink Command="ApplicationCommands.Save">Save Portfolio</Hyperlink>
             </TextBlock>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" Padding="5,5,5,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding FileName}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <TextBlock>Name: </TextBlock>
+                <TextBlock Text="{Binding FileName}" />
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" Padding="5,5,5,0">
                 <TextBlock>Schedule Terms </TextBlock>
                 <TextBox Text="{Binding Path=SheduleTerm, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"  MinWidth="50" MaxLength="3" />
             </TextBlock>

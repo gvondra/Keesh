@@ -97,6 +97,8 @@ namespace Keesh.Interface.User.NavigationPage
                     Task.Run(() => GetPortfolioItems(dialog.FileName))
                         .ContinueWith(OpenPortfolioItemsCallback, null, TaskScheduler.FromCurrentSynchronizationContext());
                     Task.Run(() => SaveApiKey(PortfolioVM.ApiKey));
+                    PortfolioVM.FileName = System.IO.Path.GetFileName(dialog.FileName);
+                    PortfolioVM.FilePath = System.IO.Path.GetFullPath(dialog.FileName);
                 }
             }
             catch (Exception ex)
@@ -154,6 +156,10 @@ namespace Keesh.Interface.User.NavigationPage
                     Title = "Open Keesh Profile",
                     ValidateNames = true
                 };
+                if (!string.IsNullOrEmpty(PortfolioVM.FilePath) && System.IO.Directory.Exists(PortfolioVM.FilePath))
+                    dialog.InitialDirectory = PortfolioVM.FilePath;
+                if (!string.IsNullOrEmpty(PortfolioVM.FileName))
+                    dialog.FileName = PortfolioVM.FileName;
                 bool? dialogResult = dialog.ShowDialog();
                 if (dialogResult.HasValue && dialogResult.Value)
                 {
