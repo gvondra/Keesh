@@ -6,6 +6,7 @@ namespace Keesh.Interface.AlphaVantage
 {
     public interface ISettings
     {
-        string BaseAddress { get; set; }        
+        string BaseAddress { get; set; } 
+        bool EnableRateLimit { get; set; }
     }
 }
