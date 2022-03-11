@@ -8,7 +8,7 @@
         Title="Keesh" Style="{StaticResource DefaultWindowStyle}">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
-                        Executed="OpenCommandBinding_Executed"/>
+                        Executed="CloseCommandBinding_Executed"/>
         <CommandBinding Command="NavigationCommands.GoToPage"
                         Executed="GoToPageCommandBinding_Executed" />
     </Window.CommandBindings>

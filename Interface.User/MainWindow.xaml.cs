@@ -26,7 +26,7 @@ namespace Keesh.Interface.User
             InitializeComponent();
         }
 
-        private void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void CloseCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
         }
