@@ -31,5 +31,14 @@ namespace Keesh.Interface.User.Properties {
                 return ((string)(this["AlphaVantageBaseAddress"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableAlphaVantageRateLimit {
+            get {
+                return ((bool)(this["EnableAlphaVantageRateLimit"]));
+            }
+        }
     }
 }
