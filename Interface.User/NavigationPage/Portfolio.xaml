@@ -59,7 +59,7 @@
                 <DataGrid ItemsSource="{Binding Path=Items}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Symbol"  Binding="{Binding Path=Symbol, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn Header="Price"  Binding="{Binding Path=Price, StringFormat='###,###,###.###', UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}">
+                        <DataGridTextColumn Header="Price"  Binding="{Binding Path=Price, StringFormat='###,###,###.###', UpdateSourceTrigger=LostFocus, TargetNullValue=''}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Right"/>
