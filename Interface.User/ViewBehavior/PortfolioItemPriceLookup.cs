@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -12,6 +13,7 @@ namespace Keesh.Interface.User.ViewBehavior
 {
     public class PortfolioItemPriceLookup
     {
+        private readonly static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private readonly PortfolioItemVM _portfolioItem;
         private readonly IPriceFactory _priceFactory;
         private readonly IApiKeyProcessor _apiKeyProcessor;
@@ -50,7 +52,18 @@ namespace Keesh.Interface.User.ViewBehavior
         {            
             Model.ApiKey apiKey = _apiKeyProcessor.GetApiKey(_settingsFactory.Create());
             if (!string.IsNullOrEmpty(apiKey?.Key))
-                return (await _priceFactory.GetDaily(symbol, apiKey.Key)).OrderByDescending(i => i.Timestamp).FirstOrDefault();
+            {
+                await _semaphore.WaitAsync();
+                try
+                {
+                    Thread.Sleep(12250);
+                    return (await _priceFactory.GetDaily(symbol, apiKey.Key)).OrderByDescending(i => i.Timestamp).FirstOrDefault();
+                }
+                finally
+                {
+                    _semaphore.Release();
+                }
+            }
             else
                 return null;
         }

@@ -18,7 +18,8 @@ namespace Keesh.Interface.User.Settings
         {
             return new AlphaVantageSettings()
             {
-                BaseAddress = Properties.Settings.Default.AlphaVantageBaseAddress
+                BaseAddress = Properties.Settings.Default.AlphaVantageBaseAddress,
+                EnableRateLimit = Properties.Settings.Default.EnableAlphaVantageRateLimit
             };
         }
     }

@@ -9,5 +9,6 @@ namespace Keesh.Interface.User.Settings
     public class AlphaVantageSettings : Keesh.Interface.AlphaVantage.ISettings
     {
         public string BaseAddress { get; set; }
+        public bool EnableRateLimit { get; set; }
     }
 }
