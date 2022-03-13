@@ -3,7 +3,7 @@ using Keesh.Interface.AlphaVantage;
 
 namespace Keesh.Interface.User.DependencyInjection
 {
-    public class ContainerFactory
+    public static class ContainerFactory
     {
         private static readonly IContainer _container;
 
