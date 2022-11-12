@@ -39,7 +39,7 @@ namespace Keesh.Interface.AlphaVantage
                 outputSize = "compact";
             UriBuilder uriBuilder = new UriBuilder(settings.BaseAddress);
             uriBuilder.Path = "query";
-            uriBuilder.Query = $"function=TIME_SERIES_DAILY&symbol={HttpUtility.UrlEncode(symbol)}&outputSize={outputSize}&datatype=csv&apikey={HttpUtility.UrlEncode(apiKey)}";
+            uriBuilder.Query = $"function=TIME_SERIES_DAILY_Adjusted&symbol={HttpUtility.UrlEncode(symbol)}&outputSize={outputSize}&datatype=csv&apikey={HttpUtility.UrlEncode(apiKey)}";
             IRequest request = _service.CreateRequest(uriBuilder.Uri, HttpMethod.Get);
             IResponse response = await _service.Send(request);
             //System.Diagnostics.Debug.WriteLine(await response.Message.Content.ReadAsStringAsync());
