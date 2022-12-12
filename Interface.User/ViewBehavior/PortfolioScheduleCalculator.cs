@@ -52,6 +52,8 @@ namespace Keesh.Interface.User.ViewBehavior
 
         private void Calculate()
         {
+            if (_portfolio.Schedule != null && _portfolio.Schedule.Columns.Count != TotalColumnCount())
+                _portfolio.Schedule = null;
             DataTable table = _portfolio.Schedule;
             if (table == null)
                 table = new DataTable();
@@ -61,7 +63,7 @@ namespace Keesh.Interface.User.ViewBehavior
             InitalizeRows(table);
             CalculateSchedule(table, portfolioItems);
             if (_portfolio.Schedule == null)
-                _portfolio.Schedule = table;
+               _portfolio.Schedule = table;
         }
 
         private void CalculateSchedule(DataTable table, PortfolioItemVM[] portfolioItems)
