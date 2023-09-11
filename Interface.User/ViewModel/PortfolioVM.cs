@@ -88,6 +88,11 @@ namespace Keesh.Interface.User.ViewModel
                 }
             }
         }
+
+        public decimal ProfitLoss
+        {
+            get => TotalEquity - TotalPrincipal;
+        }
         
         public decimal TotalPrincipal
         {
@@ -98,6 +103,7 @@ namespace Keesh.Interface.User.ViewModel
                 {
                     _totalPrincipal = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(ProfitLoss));
                 }
             }
         }
@@ -121,6 +127,7 @@ namespace Keesh.Interface.User.ViewModel
                 {
                     _totalEquity = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(ProfitLoss));
                 }
             }
         }

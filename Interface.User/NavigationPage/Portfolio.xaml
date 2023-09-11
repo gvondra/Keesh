@@ -49,6 +49,7 @@
             </TextBlock>
             <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Principal: <TextBlock Text="{Binding TotalPrincipal, StringFormat='###,###,##0.00'}"/></TextBlock>
             <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Equity: <TextBlock Text="{Binding TotalEquity, StringFormat='###,###,##0.00'}" Foreground="{Binding TotalEquityColor}"/></TextBlock>
+            <TextBlock Padding="5,0" HorizontalAlignment="Right">Gain/Loss: <TextBlock Text="{Binding ProfitLoss, StringFormat='###,###,##0.00'}" /></TextBlock>
             <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Recurring Investment: <TextBlock Text="{Binding TotalRecurringInvestment, StringFormat='###,###,##0.00'}" /></TextBlock>
             <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Equity Ratio: <TextBlock Text="{Binding TotalEquityRatio, StringFormat='###,###,##0.00#'}" /></TextBlock>
             <TextBlock Padding="5,0" HorizontalAlignment="Right">Total Target Equity Ratio: <TextBlock Text="{Binding TotalTargetEquityRatio, StringFormat='###,###,##0.00#'}" /></TextBlock>
@@ -86,6 +87,13 @@
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Right"/>
                                     <Setter Property="Foreground" Value="{Binding ForegroundColor}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Gain/Loss"  Binding="{Binding Path=ProfitLoss, StringFormat='###,###,##0.00'}" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>

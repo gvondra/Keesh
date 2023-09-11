@@ -101,6 +101,7 @@ namespace Keesh.Interface.User.ViewModel
                 {
                     _principal = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(ProfitLoss));
                 }
             }
         }
@@ -113,9 +114,16 @@ namespace Keesh.Interface.User.ViewModel
                 {
                     _equity = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(ProfitLoss));
                 }
             }
         }
+
+        public decimal? ProfitLoss
+        {
+            get => Equity.HasValue && Principal.HasValue ? Equity.Value - Principal.Value : default(decimal?);
+        }
+
         public decimal? RecurringInvestment
         {
             get => _recurringInvestment;
